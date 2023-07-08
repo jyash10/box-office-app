@@ -4,29 +4,40 @@ import { searchforPeople } from '../api/tvmaze';
 import SearchForm from '../Components/SerachForm';
 import ShowGrid from '../Components/shows/ShowGrid';
 import ActorGrid from '../Components/actors/ActorGrid';
+import { useQuery } from '@tanstack/react-query';
 const Home = () => {
  
-  const [apiData, setApiData] = useState(null);
-  const [apiDataError, setApiDataError] = useState(null);
+  // const [apiData, setApiData] = useState(null);
+  // const [apiDataError, setApiDataError] = useState(null);
   
-  
+  const [filter, setFilter] =useState(null)
+
+  const { data:apiData,error:apiDataError } = useQuery({
+      queryKey: ['search', filter],
+      queryFn: () => filter.searchOption === 'shows'?searchforShows(filter.q):searchforPeople(filter.q),
+      // ⬇️ disabled as long as the filter is empty
+      enabled: !!filter,
+      refetchOnWindowFocus:false
+  })
   
  
 
   const onSearch = async ({q,searchOption}) => {
-    try {
-      if(searchOption==="shows"){
-      setApiDataError(null);
-      const result = await searchforShows(q);
-      setApiData(result);
-      }
-      else{
-        const result = await searchforPeople(q);
-        setApiData(result);
-      }
-    } catch (error) {
-      setApiDataError(error);
-    }
+    
+    setFilter({q,searchOption})
+    // try {
+    //   if(searchOption==="shows"){
+    //   setApiDataError(null);
+    //   const result = await searchforShows(q);
+    //   setApiData(result);
+    //   }
+    //   else{
+    //     const result = await searchforPeople(q);
+    //     setApiData(result);
+    //   }
+    // } catch (error) {
+    //   setApiDataError(error);
+    // }
   };
   //    https://api.tvmaze.com/search/shows?q=girls
 
