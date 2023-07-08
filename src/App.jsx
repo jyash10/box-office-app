@@ -3,8 +3,17 @@ import Home from './pages/Home';
 import Starred from './pages/Starred';
 import MainLayout from './Components/MainLayout';
 import Show from './pages/Show';
+
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
+
 function App() {
   return (
+    <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <Routes>
         <Route element={<MainLayout />}>
@@ -32,6 +41,7 @@ function App() {
       <Route path="contact-us" element={<Contact />} /> */}
       </Routes>
     </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 
