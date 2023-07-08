@@ -1,8 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 const SearchForm=({onSearch})=>{
     const [searchStr, setSearchStr] = useState('');
     const [searchOption,setSearchOption]=useState('shows')
     
+     // useEffect always runs once
+
+    console.log("component rerenders")
+    useEffect(()=>{
+      console.log("search option changes",searchOption);
+
+      return ()=>{
+        console.log("bofre next effect Search option changes",searchOption);
+      }
+    },[searchOption])
+
+
     const onSearchInputChange = ev => {
         setSearchStr(ev.target.value);
       };
