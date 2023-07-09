@@ -1,16 +1,22 @@
-import { useState } from 'react';
+import { useState} from 'react';
 import { searchforShows } from '../api/tvmaze';
 import { searchforPeople } from '../api/tvmaze';
 import SearchForm from '../Components/SerachForm';
 import ShowGrid from '../Components/shows/ShowGrid';
 import ActorGrid from '../Components/actors/ActorGrid';
 import { useQuery } from '@tanstack/react-query';
+
+
 const Home = () => {
  
   // const [apiData, setApiData] = useState(null);
   // const [apiDataError, setApiDataError] = useState(null);
   
   const [filter, setFilter] =useState(null)
+
+
+  
+
 
   const { data:apiData,error:apiDataError } = useQuery({
       queryKey: ['search', filter],
@@ -59,8 +65,7 @@ const Home = () => {
   return (
     <div>
     <SearchForm onSearch={onSearch}/>
-      {/* Home
-       */}
+      
       <div>{renderApiData()}</div> 
     </div>
   );

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getShowById } from "../api/tvmaze";
 
@@ -30,7 +30,7 @@ const Show=()=>{
     if(showData)
     {
         return <div>
-
+            <Link to="/">Go back to home</Link>
             <ShowMainData image={showData.image} name={showData.name} rating={showData.rating} summary={showData.summary} genres={showData.genres}/>
             <div>
                 <h2>Details</h2>
