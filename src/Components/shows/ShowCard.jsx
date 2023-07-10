@@ -2,7 +2,7 @@ import { useRef } from "react";
 import styled  from "styled-components";
 import { SearchCard,SearchImgWrapper } from "../common/SearchCard";
 import { StarIcon } from "../common/StarIcon";
-
+import { Link } from "react-router-dom";
 const ShowCard=({name,image,id,summary,onStarMeClick,isStarred})=>{
    
    const summaryStripped=summary?summary.split(' ').slice(0,10).join(' ').replace(/<.+?>/g,'')+"...":"No-description"
@@ -34,7 +34,7 @@ const ShowCard=({name,image,id,summary,onStarMeClick,isStarred})=>{
     
     <p>{summaryStripped}</p>
     <ActionSection>
-        <a href={`/show/${id}`} target="_blank" rel="noreferrer">  Read More</a>
+        <Link to={`/show/${id}`} target="_blank" rel="noreferrer">  Read More</Link>
         <StarBtn 
          ref={starBtnRef} type="button" onClick={handleStarClick}
         >
