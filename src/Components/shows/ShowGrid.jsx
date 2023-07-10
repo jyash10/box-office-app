@@ -2,7 +2,7 @@ import { json } from "react-router-dom";
 import ShowCard from "./ShowCard";
 import { useReducer,useEffect } from "react";
 import { useStarredShows } from "../../lib/useStarredShows";
-
+import { FlexGrid } from "../common/FlexGrid";
 
 const ShowGrid=({shows})=>{
   
@@ -21,7 +21,7 @@ const ShowGrid=({shows})=>{
       dispatchStarred({type:"STAR",showId});
     }
   }
-  return( <div>{
+  return( <FlexGrid>{
     shows.map(data =>(
         <ShowCard key={data.show .id} id={data.show.id} name={data.show.name} image={data.show.image?data.show.image.medium:"/not_found_image.png"} 
         summary={data.show.summary}
@@ -31,7 +31,7 @@ const ShowGrid=({shows})=>{
     
     )
     )
-  }</div>
+  }</FlexGrid>
   )
 
 }

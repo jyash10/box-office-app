@@ -5,7 +5,35 @@ import SearchForm from '../Components/SerachForm';
 import ShowGrid from '../Components/shows/ShowGrid';
 import ActorGrid from '../Components/actors/ActorGrid';
 import { useQuery } from '@tanstack/react-query';
+import styled,{css,ThemeProvider} from 'styled-components'
+import { TextCenter } from '../Components/common/TextCenter';
+const theme={
+  colors:{
+    main:'blue',
+},
+};
 
+const Container=styled.div`
+ text-align: center;
+`
+
+const Button=styled.button`
+ background: transparent;
+ border-radius: 3px;
+ border: 2px solid palevioletred;
+ color: ${(props)=>props.theme.colors.main};
+ margin: 0 1em;
+ padding: 0.25em 1em;
+ 
+ ${props =>
+   props.primary &&
+   css`
+   background: "palevioletred";
+   color : "white";
+   `}
+
+
+`;
 
 const Home = () => {
  
@@ -31,29 +59,17 @@ const Home = () => {
   const onSearch = async ({q,searchOption}) => {
     
     setFilter({q,searchOption})
-    // try {
-    //   if(searchOption==="shows"){
-    //   setApiDataError(null);
-    //   const result = await searchforShows(q);
-    //   setApiData(result);
-    //   }
-    //   else{
-    //     const result = await searchforPeople(q);
-    //     setApiData(result);
-    //   }
-    // } catch (error) {
-    //   setApiDataError(error);
-    // }
+  
   };
   //    https://api.tvmaze.com/search/shows?q=girls
 
   const renderApiData = () => {
     if (apiDataError) {
-      return <div>Error occured: {apiDataError.message}</div>;
+      return <TextCenter>Error occured: {apiDataError.message}</TextCenter>;
     }
 
     if(apiData?.length === 0){
-        return <div>No Results</div>
+        return <TextCenter>No Results</TextCenter>
     }
 
     if (apiData) {
@@ -64,6 +80,10 @@ const Home = () => {
 
   return (
     <div>
+    <ThemeProvider theme={theme}>
+    <Container>
+    </Container>
+    </ThemeProvider>
     <SearchForm onSearch={onSearch}/>
       
       <div>{renderApiData()}</div> 
